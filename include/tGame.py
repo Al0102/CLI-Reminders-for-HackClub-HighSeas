@@ -42,7 +42,7 @@ def clearRenderBuffer():
 def render(*commands):
     global render_buffer
     for command in commands:
-        render_buffer += command
+        render_buffer += str(command)
 
 def renderCopy():
     global render_buffer
