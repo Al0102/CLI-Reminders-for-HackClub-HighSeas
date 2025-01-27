@@ -42,7 +42,6 @@ class Rect:
 
     @size.setter
     def size(self, new_size: Vector2):
-        print(new_size)
         self._size = new_size
         self._width = new_size[0]
         self._height = new_size[1]
@@ -74,7 +73,7 @@ class Rect:
     def render(self):
         rendered = f"\033[{self.pos.y};{self.pos.x}H"
         for i in range(self._height):
-            rendered += f"{'#'*self._width}\033[{1+i};{self.pos.x}H"
+            rendered += '#'*self._width+f"\033[{self.pos.y+i+1};{self.pos.x}H"
         return rendered
 
 
@@ -84,20 +83,23 @@ if __name__ == "__main__":
     tGame.screenClear()
     tGame.renderCopy()
 
+    input (Vector2(9,8)+Vector2(9,8))
+
     myrect = Rect(Vector2(1,1),Vector2(10,10))
     yourrect = Rect(Vector2(9,8),Vector2(40,20))
 
+    tGame.setCursor(*myrect.pos)
     tGame.render(myrect.render())
     tGame.renderCopy()
     input()
 
     tGame.screenClear()
-    tGame.renderCopy()
     myrect.size = myrect.size + yourrect.size
 
+    tGame.setCursor(*myrect.pos)
     tGame.render(myrect.render())
     tGame.renderCopy()
 
-    #tGame.setCursor(position=myrect.center_pos())
+    tGame.setCursor(position=myrect.center_pos())
     tGame.renderCopy()
     input()
